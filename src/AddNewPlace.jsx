@@ -42,18 +42,21 @@ export default class AddNewPlace extends React.Component {
     return (
       <div className='add-new-place'>
         <form className='form form--post-place'>
+          <div className='plus-icon'>┼</div>
           <input 
-            className='add-place-name' 
+            className='input input--add-place-name place-title' 
             placeholder='Add a new place'
             value={this.state.newPlace.name} 
             name='name' 
             type='text' 
             onChange={this.handleChange} />
 
-          <input className='submit--post-place' type='submit' onClick={this.handleClick} value='Post place' />
+          <input
+            className='submit submit--post-place'
+            type='submit'
+            onClick={this.handleClick}
+            value='Post place' />
         </form>
-
-        <button className='button--add-new-place'>Add new place</button>
       </div>
     );
   }

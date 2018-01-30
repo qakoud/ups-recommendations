@@ -1,7 +1,8 @@
 import React from 'react';
 import Places from 'Places';
 import Utilities from 'Utilities';
-import 'App.scss';
+import firebase from './firebase.js';
+import 'scss/App.scss';
 
 const placeData = [
   {
@@ -66,7 +67,6 @@ export default class App extends React.Component {
         <Utilities />
 
         <Places places={this.state.placeData} />
-        {console.log('Database: ' + placeData.name)}
       </main>
     );
   }

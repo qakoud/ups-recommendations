@@ -3,6 +3,7 @@ import Comments from 'Comments';
 import ThingsToGet from 'ThingsToGet';
 
 export default class Place extends React.Component {
+
   render() {
     return (
       <div className='place'>

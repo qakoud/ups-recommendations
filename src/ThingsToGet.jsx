@@ -47,7 +47,7 @@ export default class ThingsToGet extends React.Component {
   render() {
     const thingsToGet = this.state.thingsToGet.map((thingToGet, index) => {
       return (
-          <li className='thing-to-get' key={index}>
+          <li className='thing-to-get list-item' key={index}>
             {thingToGet}
           </li>
         );

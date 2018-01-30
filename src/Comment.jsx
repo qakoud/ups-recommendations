@@ -5,7 +5,7 @@ export default class Comment extends React.Component {
     const time = new Date(Date.now()).toDateString();
 
     return (
-      <li className='comment'>
+      <li className='comment list-item'>
         <div className='meta'>
           <div className='author'>Author</div>
           <div className='time'>{time}</div>
