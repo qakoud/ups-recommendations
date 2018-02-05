@@ -3,7 +3,6 @@ import Comments from 'Comments';
 import ThingsToGet from 'ThingsToGet';
 
 export default class Place extends React.Component {
-
   render() {
     return (
       <div className='place'>
@@ -12,7 +11,7 @@ export default class Place extends React.Component {
           <p className='place__heading place__distance'>{this.props.distance}</p>
         </div>
         <div className='place__body'>
-          <ThingsToGet thingsToGet={this.props.thingsToGet} />
+          <ThingsToGet thingsToGet={this.props.thingsToGet} firebaseData={this.props.firebaseData} />
           <Comments comments={this.props.comments} />
         </div>
       </div>

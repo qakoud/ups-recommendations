@@ -1,4 +1,5 @@
 import React from 'react';
+import createNewPlace from './createNewPlace';
 
 export default class ThingsToGet extends React.Component {
   constructor(props) {
@@ -42,6 +43,14 @@ export default class ThingsToGet extends React.Component {
     this.setState({
       thingsToGet: [...this.state.thingsToGet, newThingToGet]
     });
+
+    // Post a thing to get to Firebase
+    const thingsToGetRef = firebase.database().ref('places/place/thingsToGet/');
+    const thingToGet = {
+      thingToGet: this.state.thingToGet
+    }
+    thingsToGetRef.push(thingToGet);
+    // ---------------------------
   }
 
   render() {

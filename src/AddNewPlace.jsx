@@ -1,25 +1,19 @@
 import React from 'react';
+import createNewPlace from './createNewPlace';
 
 export default class AddNewPlace extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      newPlace: { 
-        name: '',
-        distance: '10 minutes',
-        thingsToGet: [],
-        comments: []
-      }
+      newPlace: createNewPlace()
     }
   }
 
   handleChange = (e) => {
     this.setState({
-      newPlace: {
-        name: e.target.value,
-        thingsToGet: [],
-        comments: []
-      }
+      newPlace: createNewPlace({
+        name: e.target.value
+      })
     });
   }
 
@@ -28,14 +22,10 @@ export default class AddNewPlace extends React.Component {
     if ( this.state.newPlace.name != '' ) {
       this.props.postNewPlace( this.state.newPlace );
       this.setState({
-        newPlace: {
-          name: '',
-          distance: '',
-          thingsToGet: [],
-          comments: []
-        }
+        newPlace: createNewPlace()
       });
-    }
+    };
+    console.log(this.state);
   }
 
   render() {
@@ -43,12 +33,12 @@ export default class AddNewPlace extends React.Component {
       <div className='add-new-place'>
         <form className='form form--post-place'>
           <div className='plus-icon'>┼</div>
-          <input 
-            className='input input--add-place-name place-title' 
+          <input
+            className='input input--add-place-name place-title'
             placeholder='Add a new place'
-            value={this.state.newPlace.name} 
-            name='name' 
-            type='text' 
+            value={this.state.newPlace.name}
+            name='name'
+            type='text'
             onChange={this.handleChange} />
 
           <input

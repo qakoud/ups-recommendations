@@ -20,10 +20,20 @@ export default class LeaveComment extends React.Component {
 	handleClick = (e) => {
 		e.preventDefault();
 		if ( this.state.comment != '' ) {
+      // Post comment to <Comments /> component
 			this.props.postComment(this.state.comment);
+      // ---------------------------
+
+      // Post comment to Firebase
+      const commentsRef = firebase.database().ref('places/place/comments/');
+      const comment = {
+        comment: this.state.comment
+      }
+      commentsRef.push(comment);
+      // ---------------------------
 		}
 	}
-	
+
 	render() {
 	return (
 		<div className='leave-comment'>

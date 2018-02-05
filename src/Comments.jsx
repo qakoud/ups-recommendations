@@ -6,10 +6,26 @@ export default class Comments extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      comments: this.props.comments
+      comments: this.props.comments,
     };
   }
-    
+
+  componentDidMount() {
+    const commentsRef = firebase.database().ref('places/place/comments/');
+    // commentsRef.on('value', (snapshot) => {
+    //   let comments = snapshot.val();
+    //   console.log('comments: ' + commentsRef);
+    //   let newState = [];
+    //   for ( let comment in comments ) {
+    //     newState.push({
+    //       comment: comments[comment].comment
+    //     })
+    //   }
+    //   this.setState({
+    //     comments: newState
+    //   })
+    // });
+  }
 
   postComment = (newComment) => {
     this.setState({
