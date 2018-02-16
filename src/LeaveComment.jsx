@@ -20,10 +20,16 @@ export default class LeaveComment extends React.Component {
 	handleClick = (e) => {
 		e.preventDefault();
 		if ( this.state.comment != '' ) {
+      // Post comment to <Comments /> component
 			this.props.postComment(this.state.comment);
+      // Empty the state to update the input field
+      this.setState({
+        comment: '',
+        active: false
+      })
 		}
 	}
-	
+
 	render() {
 	return (
 		<div className='leave-comment'>
@@ -31,6 +37,7 @@ export default class LeaveComment extends React.Component {
 				<input
 					className='input input--comment'
 					placeholder='Leave comment...'
+          value={this.state.comment}
 					onChange={this.handleChange} />
 				<span className={this.state.active ? 'post-hint active' : 'post-hint'}>↵</span>
 				<button className='submit submit--comment' onClick={this.handleClick}>Post comment</button>

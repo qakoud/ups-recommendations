@@ -1,0 +1,56 @@
+/* 
+Variables
+*/
+// Colors
+$color-1: #f9f9f7;
+$color-1--darker: darken($color-1, 5%);
+$color-2: #ea6e95;
+$color-3: #7c7c79;
+$color-4: #ecece8;
+$color-5: #94f7e0;
+$black: #000;
+$white: #fff;
+
+// Spacing
+$base-spacing: .85rem;
+$sm-spacing: $base-spacing / 1.618;
+$md-spacing: $base-spacing * 1.618;
+$lg-spacing: $md-spacing * 1.618;
+
+// Widths
+$app-width: 600px;
+
+// Font sizes
+$base-font-size: 1.125rem;
+$sm-font-size: $base-font-size / 1.618;
+$xs-font-size: $sm-font-size / 1.618;
+$md-font-size: $base-font-size * 1.618;
+$lg-font-size: $md-font-size * 1.618;
+
+// Letter spacing
+$loose-letter-spacing: 1.618px;
+$wide-letter-spacing: 3.236px;
+
+// Leading
+$base-line-height: 1.4;
+$line-height--md: $base-line-height * 1.618;
+
+// Border
+$base-border-width: 1px;
+$lg-border-width: $base-border-width * 4;
+$base-border-style: solid;
+$double-border-style: double;
+$base-border-color: $color-4;
+$base-border: $base-border-width $base-border-style $base-border-color;
+$base-border--double: $lg-border-width $double-border-style $base-border-color;
+
+$border-width-3: 3px;
+$border-color-1: $color-5;
+
+$border-1: $border-width-3 $base-border-style $border-color-1;
+
+// Font family
+$font-family-1: 'space mono', monospace;
+$font-family-2: 'eczar', 'serif';
+$font-family-3: 'Work Sans', 'sans-serif';
+$font-family-4: 'Ultra', 'serif';

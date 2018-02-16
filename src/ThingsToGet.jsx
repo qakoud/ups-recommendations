@@ -1,75 +1,38 @@
-import React from 'react';
+import React, { Component } from 'react';
+import AddThingToGet from 'AddThingToGet';
+import RemoveThingToGet from 'RemoveThingToGet';
 
-export default class ThingsToGet extends React.Component {
+export default class ThingsToGet extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      thingsToGet: this.props.thingsToGet,
-      thingToGet: '',
 
-      // Style states
-      active: false,
-      hasValue: false
-    }
-  }
-
-  handleChange = (e) => {
-    this.setState({
-      thingToGet: e.target.value
-    });
-
-    e.target.value === '' ? this.setState({ active: false, hasValue: false }) : this.setState({ active: true, hasValue: true });
-  }
-
-  // Handle submit
-  handleClick = (e) => {
-    e.preventDefault();
-    if ( this.state.thingToGet != '' ) {
-      this.postThingToGet(this.state.thingToGet);
-      this.setState({
-        thingToGet: '',
-        active: false
-      });
-    } else {
-      this.setState({
-        hasValue: true
-      });
-    }
+    this.database         = this.props.database;
+    this.thingsToGetRef   = this.database.ref('thingsToGet');
+    this.thingToGetRef    = this.thingsToGetRef.child(this.props.placeId);
   }
 
   // Add the new text to the Things To Get list
   postThingToGet = (newThingToGet) => {
-    this.setState({
-      thingsToGet: [...this.state.thingsToGet, newThingToGet]
-    });
+    this.thingToGetRef.push().set({ thingToGet: newThingToGet });
   }
 
   render() {
-    const thingsToGet = this.state.thingsToGet.map((thingToGet, index) => {
+    const thingsToGet = this.props.thingsToGet.map((thingToGet, index) => {
       return (
-          <li className='thing-to-get' key={index}>
+          <li className='thing-to-get list-item' key={index}>
             {thingToGet}
+            <RemoveThingToGet database={this.props.database} thingToRemove={this.thingToGetRef} />
           </li>
         );
     });
 
     return (
       <div className='things-to-get'>
-        <h3 className='place__heading'>Things to get</h3>
+        <h3 className='place__heading'><span>{thingsToGet.length}</span> Things to get</h3>
         <ul className='things-list list'>
           {thingsToGet}
         </ul>
-        <form className='form form--thing-to-get'>
-          <input
-            type='text'
-            className={ this.state.hasValue ? 'input input--thing-to-get has-value' : 'input input--thing-to-get' }
-            placeholder='Add a thing to get from this place'
-            value={this.state.thingToGet}
-            onChange={this.handleChange}
-          />
-          <span className={this.state.active ? 'post-hint active' : 'post-hint'}>↵</span>
-          <input type='submit' className='submit submit--thing-to-get' onClick={this.handleClick} />
-        </form>
+        <AddThingToGet postThingToGet={this.postThingToGet} />
       </div>
     );
   }

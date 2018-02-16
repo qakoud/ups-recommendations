@@ -1,26 +1,25 @@
-import React from 'react';
+import React, { Component } from 'react';
+import createNewPlace from './createNewPlace';
 
-export default class AddNewPlace extends React.Component {
+export default class AddNewPlace extends Component {
   constructor(props) {
     super(props);
+
     this.state = {
-      newPlace: { 
-        name: '',
-        distance: '10 minutes',
-        thingsToGet: [],
-        comments: []
-      }
+      newPlace: createNewPlace(),
+      hasValue: false
     }
   }
 
   handleChange = (e) => {
     this.setState({
-      newPlace: {
+      newPlace: createNewPlace({
         name: e.target.value,
-        thingsToGet: [],
-        comments: []
-      }
+        placeId: this.props.placeId
+      })
     });
+
+    e.target.value === '' ? this.setState({hasValue: false}) : this.setState({hasValue: true})
   }
 
   handleClick = (e) => {
@@ -28,32 +27,30 @@ export default class AddNewPlace extends React.Component {
     if ( this.state.newPlace.name != '' ) {
       this.props.postNewPlace( this.state.newPlace );
       this.setState({
-        newPlace: {
-          name: '',
-          distance: '',
-          thingsToGet: [],
-          comments: []
-        }
+        newPlace: createNewPlace()
       });
-    }
+    };
   }
 
   render() {
     return (
       <div className='add-new-place'>
         <form className='form form--post-place'>
-          <input 
-            className='add-place-name' 
+          <div className='plus-icon'>┼</div>
+          <input
+            className={this.state.hasValue ? 'input input--add-place-name place-title input-has-value' : 'input input--add-place-name place-title'}
             placeholder='Add a new place'
-            value={this.state.newPlace.name} 
-            name='name' 
-            type='text' 
+            value={this.state.newPlace.name}
+            name='name'
+            type='text'
             onChange={this.handleChange} />
 
-          <input className='submit--post-place' type='submit' onClick={this.handleClick} value='Post place' />
+          <input
+            className='submit submit--post-place'
+            type='submit'
+            onClick={this.handleClick}
+            value='Post place' />
         </form>
-
-        <button className='button--add-new-place'>Add new place</button>
       </div>
     );
   }

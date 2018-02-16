@@ -1,59 +1,5 @@
-/* 
-Variables
-*/
-// Colors
-$color-1: #f9f9f7;
-$color-1--darker: darken($color-1, 5%);
-$color-2: #ea6e95;
-$color-3: #7c7c79;
-$color-4: #ecece8;
-$color-5: #94f7e0;
-$black: #000;
-$white: #fff;
-
-// Spacing
-$base-spacing: .85rem;
-$sm-spacing: $base-spacing / 1.618;
-$md-spacing: $base-spacing * 1.618;
-$lg-spacing: $md-spacing * 1.618;
-
-// Widths
-$app-width: 600px;
-
-// Font sizes
-$base-font-size: 1.125rem;
-$sm-font-size: $base-font-size / 1.618;
-$xs-font-size: $sm-font-size / 1.618;
-$md-font-size: $base-font-size * 1.618;
-$lg-font-size: $md-font-size * 1.618;
-
-// Letter spacing
-$loose-letter-spacing: 1.618px;
-$wide-letter-spacing: 3.236px;
-
-// Leading
-$base-line-height: 1.4;
-$line-height--md: $base-line-height * 1.618;
-
-// Border
-$base-border-width: 1px;
-$lg-border-width: $base-border-width * 4;
-$base-border-style: solid;
-$double-border-style: double;
-$base-border-color: $color-4;
-$base-border: $base-border-width $base-border-style $base-border-color;
-$base-border--double: $lg-border-width $double-border-style $base-border-color;
-
-$border-width-3: 3px;
-$border-color-1: $color-5;
-
-$border-1: $border-width-3 $base-border-style $border-color-1;
-
-// Font family
-$font-family-1: 'space mono', monospace;
-$font-family-2: 'eczar', 'serif';
-$font-family-3: 'Work Sans', 'sans-serif';
-$font-family-4: 'Ultra', 'serif';
+@import 'variables';
+@import 'comments';
 
 %psudo {
   content: '';
@@ -95,11 +41,15 @@ li {
   padding: initial;
 }
 
+body {
+  margin: 0;
+}
+
 /*
 Styles
 */
 .font-style-1 {
-  @extend %font-style-1;  
+  @extend %font-style-1;
 }
 
 * {
@@ -148,7 +98,7 @@ Styles
   background-size: cover;
   background-position: center;
   position: relative;
-  
+
   &::before {
     @extend %psudo;
     width: 100%;
@@ -198,7 +148,7 @@ Styles
   position: relative;
   padding-right: $base-spacing;
   cursor: pointer;
-  
+
   &::after {
     @extend %psudo;
     content: '◢';
@@ -206,7 +156,7 @@ Styles
     transform-origin: cener;
     left: 100%;
   }
-  
+
   &.asc {
     &::after {
       transform: scale(0.8) rotate(45deg);
@@ -239,8 +189,7 @@ Styles
 }
 
 .place {
-  margin: 0 0 $lg-spacing;
-  padding: 0 0 $md-spacing;
+  padding: 0 0 ( $md-spacing + ( $lg-spacing * 2 ) );
 }
 
 .place__header {
@@ -272,16 +221,7 @@ Styles
   max-width: 90%;
 }
 
-.comments {
-  border-top: $base-border;
-}
-
-.things-to-get {
-  margin-bottom: $md-spacing;
-}
-
-.thing-to-get,
-.comment {
+.list-item {
   margin-bottom: $md-spacing;
   position: relative;
   display: flex;
@@ -290,13 +230,17 @@ Styles
   font-family: $font-family-3;
   line-height: 1.6;
   color: $color-3;
-  
+
   &::before {
     content: '→';
     padding-right: $base-spacing;
     color: $black;
     font-size: $sm-font-size;
   }
+}
+
+.things-to-get {
+  margin-bottom: $md-spacing;
 }
 
 .button__add--thing-to-get {
@@ -319,44 +263,18 @@ Styles
   }
 }
 
-.comment {
-  flex-direction: column;
-  padding-left: $md-spacing;
-  border-left: $base-border;
-  margin-bottom: $lg-spacing;
-  
-  .author,
-  .text,
-  .time {
-    display: block;
-    width: 100%;
-  }
-  
-  .author,
-  .time {
-    @extend %font-style-1;
-    width: auto;
-  }
-  
-  .text {
-    font-family: $font-family-3;
-  }
-  
-  &::before {
-    display: none;
-  }
-}
-
-.meta {
-  display: flex;
-  justify-content: space-between;
-  width: 100%;
-  margin-bottom: $sm-spacing;
-}
-
 .form {
   position: relative;
   display: flex;
+}
+
+.form--post-place {
+  &:hover {
+    &.plus-icon {
+      color: $color-3;
+      opacity: 1;
+    }
+  }
 }
 
 .leave-comment {
@@ -385,7 +303,7 @@ Styles
   width: 100%;
   box-sizing: border-box;
   padding: $base-spacing $md-spacing;
-  
+
   &:active,
   &:focus {
     outline: $base-border-style $border-color-1;
@@ -398,7 +316,7 @@ Styles
   &:focus {
     background-color: $white;
   }
-  
+
   &::placeholder {
     @extend %placeholder;
     opacity: 0.5;
@@ -455,4 +373,77 @@ Styles
 
 .submit {
   display: none;
+}
+
+.add-new-place {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  max-width: $app-width;
+  margin-left: ( $lg-spacing * -1 );
+}
+
+.input--add-place-name {
+  background-color: $color-2;
+  border: 0;
+  font-size: $md-font-size;
+  font-weight: bold;
+  padding-right: $lg-spacing;
+  padding-left: $lg-spacing;
+  position: relative;
+
+  &::placeholder {
+    color: $color-1;
+    opacity: 0.65;
+  }
+
+  &:hover,
+  &:focus {
+    &::placeholder {
+      color: $color-3;
+      opacity: 0.25;
+    }
+  }
+}
+
+.plus-icon {
+  position: absolute;
+  right: $md-spacing;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: $base-font-size;
+  color: $white;
+  background-color: transparent;
+  border: 0;
+  z-index: 1;
+  pointer-events: none;
+}
+
+@keyframes fadeOut {
+  0%,
+  70% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+.new-place {
+  position: relative;
+  box-sizing: content-box;
+
+  &::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: ( $lg-spacing * -1 );
+    width: calc( 100% - ( #{$lg-border-width} * 2 ) );
+    height: 100%;
+    border: 4px solid $color-5;
+    margin-left: ( $lg-spacing * -1 );
+    padding-left: $lg-spacing;
+    padding-right: $lg-spacing;
+    animation: fadeOut 1.5s forwards;
+  }
 }

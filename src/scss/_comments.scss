@@ -1,0 +1,38 @@
+.comments {
+  border-top: $base-border;
+}
+
+.comment {
+  flex-direction: column;
+  padding-left: $md-spacing;
+  border-left: $base-border;
+  margin-bottom: $lg-spacing;
+  
+  .author,
+  .text,
+  .time {
+    display: block;
+    width: 100%;
+  }
+  
+  .author,
+  .time {
+    @extend %font-style-1;
+    width: auto;
+  }
+  
+  .text {
+    font-family: $font-family-3;
+  }
+  
+  &::before {
+    display: none;
+  }
+}
+
+.meta {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  margin-bottom: $sm-spacing;
+}
