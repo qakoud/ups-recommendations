@@ -1,7 +1,6 @@
-import firebase from 'firebase';
+import firebase from 'firebase/app';
 
-// Initialize Firebase
-var config = {
+const config = {
   apiKey: "AIzaSyCmYWQ6TMZfUsptYx3RuYxZPDxkeai64-s",
   authDomain: "ups-recommendations.firebaseapp.com",
   databaseURL: "https://ups-recommendations.firebaseio.com",

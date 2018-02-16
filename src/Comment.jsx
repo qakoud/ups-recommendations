@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { Component } from 'react';
 
-export default class Comment extends React.Component {
+export default class Comment extends Component {
   render() {
     const time = new Date(Date.now()).toDateString();
 

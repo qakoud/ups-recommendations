@@ -1,20 +1,25 @@
-import React from 'react';
+import React, { Component } from 'react';
 import createNewPlace from './createNewPlace';
 
-export default class AddNewPlace extends React.Component {
+export default class AddNewPlace extends Component {
   constructor(props) {
     super(props);
+
     this.state = {
-      newPlace: createNewPlace()
+      newPlace: createNewPlace(),
+      hasValue: false
     }
   }
 
   handleChange = (e) => {
     this.setState({
       newPlace: createNewPlace({
-        name: e.target.value
+        name: e.target.value,
+        placeId: this.props.placeId
       })
     });
+
+    e.target.value === '' ? this.setState({hasValue: false}) : this.setState({hasValue: true})
   }
 
   handleClick = (e) => {
@@ -25,7 +30,6 @@ export default class AddNewPlace extends React.Component {
         newPlace: createNewPlace()
       });
     };
-    console.log(this.state);
   }
 
   render() {
@@ -34,7 +38,7 @@ export default class AddNewPlace extends React.Component {
         <form className='form form--post-place'>
           <div className='plus-icon'>┼</div>
           <input
-            className='input input--add-place-name place-title'
+            className={this.state.hasValue ? 'input input--add-place-name place-title input-has-value' : 'input input--add-place-name place-title'}
             placeholder='Add a new place'
             value={this.state.newPlace.name}
             name='name'

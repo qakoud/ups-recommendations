@@ -1,8 +1,8 @@
-let createNewPlace = ({ name = '', distance = '', thingsToGet = [], comments = [] } = {}) => {
+let createNewPlace = ({ name = '', placeId='', thingsToGet = [], comments = [] } = {}) => {
   return (
     {
       name,
-      distance,
+      placeId,
       thingsToGet,
       comments
     }

@@ -49,7 +49,7 @@ body {
 Styles
 */
 .font-style-1 {
-  @extend %font-style-1;  
+  @extend %font-style-1;
 }
 
 * {
@@ -98,7 +98,7 @@ Styles
   background-size: cover;
   background-position: center;
   position: relative;
-  
+
   &::before {
     @extend %psudo;
     width: 100%;
@@ -148,7 +148,7 @@ Styles
   position: relative;
   padding-right: $base-spacing;
   cursor: pointer;
-  
+
   &::after {
     @extend %psudo;
     content: '◢';
@@ -156,7 +156,7 @@ Styles
     transform-origin: cener;
     left: 100%;
   }
-  
+
   &.asc {
     &::after {
       transform: scale(0.8) rotate(45deg);
@@ -230,7 +230,7 @@ Styles
   font-family: $font-family-3;
   line-height: 1.6;
   color: $color-3;
-  
+
   &::before {
     content: '→';
     padding-right: $base-spacing;
@@ -303,7 +303,7 @@ Styles
   width: 100%;
   box-sizing: border-box;
   padding: $base-spacing $md-spacing;
-  
+
   &:active,
   &:focus {
     outline: $base-border-style $border-color-1;
@@ -316,7 +316,7 @@ Styles
   &:focus {
     background-color: $white;
   }
-  
+
   &::placeholder {
     @extend %placeholder;
     opacity: 0.5;
@@ -432,7 +432,7 @@ Styles
 .new-place {
   position: relative;
   box-sizing: content-box;
-  
+
   &::before {
     content: '';
     position: absolute;

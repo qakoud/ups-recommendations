@@ -1,74 +1,58 @@
-import React from 'react';
+import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import Place from 'Place';
 import AddNewPlace from 'AddNewPlace';
 import createNewPlace from './createNewPlace';
+import firebase from './firebase.js';
+import 'firebase/database';
 
-export default class Places extends React.Component {
+export default class Places extends Component {
   constructor(props) {
     super(props);
+    // -------------------------------------------------------
     this.state = {
-      places: this.props.places
+      places: this.props.places,
+      placeId: 0
     }
+    // -------------------------------------------------------
+    this.placesRef    = this.props.fireDB;
+    this.commentsData = [];
+    this.Id;
   }
 
-  componentDidUpdate() {
-    let el = ReactDOM.findDOMNode(this.refs.place);
-    el.scrollIntoView({ block: 'end', behavior: 'smooth' });
-
-    // Class to visually indicate this is the newly created place
-    el.className += ' new-place';
-    setTimeout( function() {
-      el.classList.remove('new-place');
-    }, 3000 );
+  passPlaceId = (placeId) => {
+    this.setState({ placeId: placeId + 1 });
   }
 
-  // Post a new place to the component state
+  // Post a new place to Firebase
+  // -------------------------------------------------------
   postNewPlace = (newPlace) => {
-    this.setState({
-      places: [...this.state.places, newPlace]
-    });
-
-    const placesRef = firebase.database().ref('places/place/names/');
-    const place = {
-      name: newPlace
-    };
-    placesRef.push(place);
-
-    placesRef.on('value', (snapshot) => {
-      let newState = [];
-      for ( let place in places ) {
-        newState.push({
-          name: place[name].name
-        })
-      }
-      this.setState({
-        places: newState
-      })
-    })
+    this.newRef = this.placesRef.push({ place: newPlace, comments: {} });
+    this.Id     = this.newRef.key;
   }
 
+  // -------------------------------------------------------
   render() {
   	const places = this.state.places.map((place, index) => {
   		return (
         <Place
-          name={place.name}
-          distance={place.distance}
-          distanceLink={place.distanceLink}
-          thingsToGet={place.thingsToGet}
-          comments={place.comments}
+          name={place.place.name}
+          thingsToGet={place.place.thingsToGet}
           key={index}
-          ref='place'
-          firebaseData={this.props.firebaseData}
+          placeId={index}
+          fireDB={this.props.fireDB}
+          database={this.props.database}
+          passPlaceId={this.passPlaceId}
+          comments={this.commentsData}
         />
   		);
   	});
 
     return (
       <section className='app__places'>
-      	{places}
+      	{ places }
 
-        <AddNewPlace places={places} postNewPlace={this.postNewPlace} />
+        <AddNewPlace places={places} postNewPlace={this.postNewPlace} placeId={this.state.placeId} />
       </section>
     );
   }

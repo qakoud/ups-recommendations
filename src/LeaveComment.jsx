@@ -22,15 +22,11 @@ export default class LeaveComment extends React.Component {
 		if ( this.state.comment != '' ) {
       // Post comment to <Comments /> component
 			this.props.postComment(this.state.comment);
-      // ---------------------------
-
-      // Post comment to Firebase
-      const commentsRef = firebase.database().ref('places/place/comments/');
-      const comment = {
-        comment: this.state.comment
-      }
-      commentsRef.push(comment);
-      // ---------------------------
+      // Empty the state to update the input field
+      this.setState({
+        comment: '',
+        active: false
+      })
 		}
 	}
 
@@ -41,6 +37,7 @@ export default class LeaveComment extends React.Component {
 				<input
 					className='input input--comment'
 					placeholder='Leave comment...'
+          value={this.state.comment}
 					onChange={this.handleChange} />
 				<span className={this.state.active ? 'post-hint active' : 'post-hint'}>↵</span>
 				<button className='submit submit--comment' onClick={this.handleClick}>Post comment</button>
